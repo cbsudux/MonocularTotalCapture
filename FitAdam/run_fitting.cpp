@@ -597,6 +597,8 @@ int main(int argc, char* argv[])
 
             output_file << '###############################' << i << '###############################';
             output_file << gResultJoint;
+            std::cout << '###############################' << i << '###############################'<< std::endl;
+            std::cout << gResultJoint << std::endl;
 
             VisualizedData vis_data2_;
             vis_data2_.resultJoint = gResultJoint;
