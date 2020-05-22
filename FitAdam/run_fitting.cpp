@@ -1,3 +1,5 @@
+// Generatemesh is an update function where mesh gets updated
+
 #include <GL/glew.h>
 #include <iostream>
 #include <fstream>
@@ -445,6 +447,7 @@ int main(int argc, char* argv[])
                 cv::Mat depthframe1 = cv::Mat(1080, 1920, CV_32FC1, ret_depth).clone();  // deep copy
                 cv::flip(depthframe1, depthframe1, 0);
 
+                // the problem is with getvirtualimageconstraint only --> it's rendering something
                 // run optical flow (forward)
                 cv::Mat virtualImage;
                 getVirtualImageConstraint(render, calibK, mesh1, mesh2, depthframe1, depthframe2, img1, img2, virtualImage, surface_constraint, 0);
