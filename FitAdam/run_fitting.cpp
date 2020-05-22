@@ -99,6 +99,9 @@ void filter_hand_pose(const std::vector<smpl::SMPLParams>& params, std::vector<s
 
 int main(int argc, char* argv[])
 {
+    ofstream output_file;
+    output_file.open ("output.txt");
+    
     check_flags(argc, argv);
     // render.reset(new Renderer(&argc, argv));  // initialize the OpenGL renderer
     // render->options.meshSolid = true;
@@ -590,8 +593,10 @@ int main(int argc, char* argv[])
             }
 
             mesh2.clearMesh();  // clear out the mesh before re-generating
-
             GenerateMesh(mesh2, gResultJoint, batch_refit_params[i + 1], g_total_model, 2, FLAGS_euler);
+
+            output_file << '###############################' << i << '###############################';
+            output_file << gResultJoint;
 
             VisualizedData vis_data2_;
             vis_data2_.resultJoint = gResultJoint;
@@ -652,4 +657,5 @@ int main(int argc, char* argv[])
             }
         }
     }
+    output_file.close()
 }
