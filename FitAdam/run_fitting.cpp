@@ -627,12 +627,12 @@ int main(int argc, char* argv[])
                 vis_data1.read_buffer = ret_bytes;
                 CopyMesh(mesh1, vis_data1);
 
-                Renderer::use_color_fbo = true;
-                render->CameraMode(0);
-                render->options.K = calibK;
+                // Renderer::use_color_fbo = true;
+                // render->CameraMode(0);
+                // render->options.K = calibK;
 
-                render->RenderHand(vis_data1);  // Render depth map from OpenGL
-                render->RenderAndRead();
+                // render->RenderHand(vis_data1);  // Render depth map from OpenGL
+                // render->RenderAndRead();
                 resultMeshImage = cv::Mat(1080, 1920, CV_8UC4, ret_bytes).clone();  // deep copy
                 cv::flip(resultMeshImage, resultMeshImage, 0);
                 // cv::cvtColor(resultMeshImage, resultMeshImage, cv::COLOR_RGBA2BGR);  // convert to BGR
