@@ -325,6 +325,7 @@ int main(int argc, char* argv[])
     std::vector<smpl::SMPLParams> batch_refit_params(net_output.size());
     const int total_frame = FLAGS_end - FLAGS_start;
 
+    //  till here successfull
     /*
     Stage 3: Run tracking
     */
@@ -376,6 +377,7 @@ int main(int argc, char* argv[])
         // run optical flow && refitting
         for (auto i = 0u, image_index = FLAGS_start + i; i < net_output.size() - 1; i++, image_index++)  // i -> i + 1
         {
+            //  till here successfull
             std::cout << "Run tracking image " << image_index << " -> " << image_index + 1 << std::endl;
             sprintf(basename, "%s_%08d.png", FLAGS_seqName.c_str(), image_index);
             const std::string imgName1 = FLAGS_root_dirs + "/" + FLAGS_seqName + "/raw_image/" + basename;

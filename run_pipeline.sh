@@ -4,7 +4,7 @@ set -e
 # input param 
 # $1: sequence name
 # $2: whether the video is upper body only (false by default, enable by -f)
-seqName=$1
+seqName='example_dance'
 upperBody=$2
 
 # Assume that you already have a video in $dataDir/(seqName)/(seqName).mp4 
@@ -55,5 +55,10 @@ cd $MTCDir/FitAdam/
 if [ ! -f ./build/run_fitting ]; then
 	echo "C++ project not correctly compiled. Please check your setting."
 fi
+
+
 ./build/run_fitting --root_dirs $dataDir --seqName $seqName --start 1 --end $((numFrame + 1)) --stage 1 --imageOF
 # ./build/run_fitting --root_dirs $dataDir --seqName $seqName --start 1 --end 11 --stage 1 --imageOF
+
+
+./build/run_fitting --root_dirs /opt/mtc/data --seqName example_speech --start 1 --end 31 --stage 1 --imageOF
