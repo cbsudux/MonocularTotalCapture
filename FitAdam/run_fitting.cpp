@@ -99,7 +99,7 @@ void filter_hand_pose(const std::vector<smpl::SMPLParams>& params, std::vector<s
 
 int main(int argc, char* argv[])
 {
-    ofstream output_file;
+    std::ofstream output_file;
     output_file.open ("output.txt");
 
     check_flags(argc, argv);
