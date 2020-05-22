@@ -586,7 +586,9 @@ int main(int argc, char* argv[])
             }
 
             mesh2.clearMesh();  // clear out the mesh before re-generating
+
             GenerateMesh(mesh2, gResultJoint, batch_refit_params[i + 1], g_total_model, 2, FLAGS_euler);
+
             VisualizedData vis_data2_;
             vis_data2_.resultJoint = gResultJoint;
             vis_data2_.read_buffer = ret_bytes;
