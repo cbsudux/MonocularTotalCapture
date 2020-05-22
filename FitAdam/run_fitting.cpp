@@ -98,10 +98,10 @@ void filter_hand_pose(const std::vector<smpl::SMPLParams>& params, std::vector<s
 int main(int argc, char* argv[])
 {
     check_flags(argc, argv);
-    render.reset(new Renderer(&argc, argv));  // initialize the OpenGL renderer
-    render->options.meshSolid = true;
-    render->options.show_joint = false;
-    Renderer::use_color_fbo = true;
+    // render.reset(new Renderer(&argc, argv));  // initialize the OpenGL renderer
+    // render->options.meshSolid = true;
+    // render->options.show_joint = false;
+    // Renderer::use_color_fbo = true;
 
     /*
     Stage 0: read in data
@@ -166,8 +166,8 @@ int main(int argc, char* argv[])
     LoadTotalDataFromJson(g_total_model, std::string("model/adam_v1_plus2.json"), std::string("model/adam_blendshapes_348_delta_norm.json"), std::string("model/correspondences_nofeet.txt"));
     LoadCocoplusRegressor(g_total_model, std::string("model/regressor_0n1_root.json"));
 
-    render->CameraMode(0);
-    render->options.K = calibK;
+    // render->CameraMode(0);
+    // render->options.K = calibK;
     glutDisplayFunc(emptyfunc);
     glutMainLoopEvent();
 
@@ -269,25 +269,25 @@ int main(int argc, char* argv[])
 
             VisualizedData vis_data;
             CopyMesh(mesh, vis_data);
-            render->options.view_dist = gResultJoint[2 * 3 + 2];
+            // render->options.view_dist = gResultJoint[2 * 3 + 2];
             vis_data.vis_type = 2;
 
-            if (image_index == FLAGS_start)
-            {
-                render->CameraMode(0);
-                render->options.K = calibK;
-                render->RenderHand(vis_data);
-                vis_data.read_buffer = ret_bytes;
-                render->RenderAndRead();
-                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-            }
-            render->CameraMode(0);
-            render->options.K = calibK;
-            render->RenderHand(vis_data);
-            if (FLAGS_OpenGLactive) render->Display();
+            // if (image_index == FLAGS_start)
+            // {
+            //     render->CameraMode(0);
+            //     render->options.K = calibK;
+            //     render->RenderHand(vis_data);
+            //     vis_data.read_buffer = ret_bytes;
+            //     render->RenderAndRead();
+            //     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+            // }
+            // render->CameraMode(0);
+            // render->options.K = calibK;
+            // render->RenderHand(vis_data);
+            // if (FLAGS_OpenGLactive) render->Display();
 
             vis_data.read_buffer = ret_bytes;
-            render->RenderAndRead();
+            // render->RenderAndRead();
 
             // convert to opencv format
             cv::Mat frame(ROWS, COLS, CV_8UC4, ret_bytes);
@@ -359,10 +359,10 @@ int main(int argc, char* argv[])
         CopyMesh(mesh0, vis_data0);
         vis_data0.read_depth_buffer = ret_depth;
         vis_data0.read_buffer = ret_bytes;
-        render->options.K = calibK;
-        render->CameraMode(0);  // ensure the shape of window is correct
-        render->RenderDepthMap(vis_data0);  // Render depth map from OpenGL
-        render->RenderAndReadDepthMap();
+        // render->options.K = calibK;
+        // render->CameraMode(0);  // ensure the shape of window is correct
+        // render->RenderDepthMap(vis_data0);  // Render depth map from OpenGL
+        // render->RenderAndReadDepthMap();
         cv::Mat depthframe0 = cv::Mat(1080, 1920, CV_32F, ret_depth).clone();  // deep copy
         cv::flip(depthframe0, depthframe0, 0);
 
@@ -430,16 +430,16 @@ int main(int argc, char* argv[])
                 vis_data1.read_buffer = ret_bytes;
                 CopyMesh(mesh2, vis_data2);
                 CopyMesh(mesh1, vis_data1);
-                render->CameraMode(0);  // ensure the shape of window is correct
-                render->options.K = calibK;
-                render->RenderDepthMap(vis_data2);  // Render depth map from OpenGL
-                render->RenderAndReadDepthMap();
+                // render->CameraMode(0);  // ensure the shape of window is correct
+                // render->options.K = calibK;
+                // render->RenderDepthMap(vis_data2);  // Render depth map from OpenGL
+                // render->RenderAndReadDepthMap();
                 cv::Mat depthframe2 = cv::Mat(1080, 1920, CV_32FC1, ret_depth).clone();  // deep copy
                 cv::flip(depthframe2, depthframe2, 0);
-                render->CameraMode(0);  // ensure the shape of window is correct
-                render->options.K = calibK;
-                render->RenderDepthMap(vis_data1);  // Render depth map from OpenGL
-                render->RenderAndReadDepthMap();
+                // render->CameraMode(0);  // ensure the shape of window is correct
+                // render->options.K = calibK;
+                // render->RenderDepthMap(vis_data1);  // Render depth map from OpenGL
+                // render->RenderAndReadDepthMap();
                 cv::Mat depthframe1 = cv::Mat(1080, 1920, CV_32FC1, ret_depth).clone();  // deep copy
                 cv::flip(depthframe1, depthframe1, 0);
 
@@ -462,10 +462,10 @@ int main(int argc, char* argv[])
                         vis_data3.read_depth_buffer = ret_depth;
                         vis_data3.read_buffer = ret_bytes;
                         CopyMesh(mesh3, vis_data3);
-                        render->CameraMode(0);  // ensure the shape of window is correct
-                        render->options.K = calibK;
-                        render->RenderDepthMap(vis_data3);  // Render depth map from OpenGL
-                        render->RenderAndReadDepthMap();
+                        // render->CameraMode(0);  // ensure the shape of window is correct
+                        // render->options.K = calibK;
+                        // render->RenderDepthMap(vis_data3);  // Render depth map from OpenGL
+                        // render->RenderAndReadDepthMap();
                         depthframe1 = cv::Mat(1080, 1920, CV_32F, ret_depth).clone();  // deep copy
                         cv::flip(depthframe1, depthframe1, 0);
 
@@ -594,12 +594,12 @@ int main(int argc, char* argv[])
             vis_data2_.read_buffer = ret_bytes;
             CopyMesh(mesh2, vis_data2_);
 
-            Renderer::use_color_fbo = true;
-            render->CameraMode(0);
-            render->options.K = calibK;
+            // Renderer::use_color_fbo = true;
+            // render->CameraMode(0);
+            // render->options.K = calibK;
 
-            render->RenderHand(vis_data2_);  // Render depth map from OpenGL
-            render->RenderAndRead();
+            // render->RenderHand(vis_data2_);  // Render depth map from OpenGL
+            // render->RenderAndRead();
             resultMeshImage = cv::Mat(1080, 1920, CV_8UC4, ret_bytes).clone();  // deep copy
             cv::flip(resultMeshImage, resultMeshImage, 0);
 
