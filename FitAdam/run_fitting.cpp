@@ -101,7 +101,7 @@ int main(int argc, char* argv[])
 {
     ofstream output_file;
     output_file.open ("output.txt");
-    
+
     check_flags(argc, argv);
     // render.reset(new Renderer(&argc, argv));  // initialize the OpenGL renderer
     // render->options.meshSolid = true;
@@ -657,5 +657,5 @@ int main(int argc, char* argv[])
             }
         }
     }
-    output_file.close()
+    output_file.close();
 }
