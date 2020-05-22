@@ -223,7 +223,7 @@ cv::Mat& resultImg,
 cv::Mat& XY,
 const bool background)   // whether to use background from the source image
 {
-    assert(render);
+    // assert(render);
     assert(mesh1.m_vertices.size() == mesh2.m_vertices.size());
 
     VisualizedData vis_data;
@@ -240,12 +240,12 @@ const bool background)   // whether to use background from the source image
             vis_data.m_meshVerticesColor[iv] = cv::Point3d(-10000., -10000., 0.);
     }
 
-    render->CameraMode(0);
+    // render->CameraMode(0);
     double calibK[9];
     std::copy(K, K + 9, calibK);
-    render->options.K = calibK;
-    render->RenderProjection(vis_data);
-    render->RenderAndReadProjection();
+    // render->options.K = calibK;
+    // render->RenderProjection(vis_data);
+    // render->RenderAndReadProjection();
     XY = cv::Mat(sourceImg.rows, sourceImg.cols, CV_32FC3, RGBFLOAT_BUFFER);   // wrapper around buffer
     cv::flip(XY, XY, 0);
 
@@ -310,7 +310,7 @@ cv::Mat& resultImg,
 std::vector<cv::Point3i>& target_constraints,
 const uint sample_dist)
 {
-    assert(render);
+    // assert(render);
     assert(mesh1.m_vertices.size() == mesh2.m_vertices.size());
 
     VisualizedData vis_data;
@@ -327,12 +327,12 @@ const uint sample_dist)
             vis_data.m_meshVerticesColor[iv] = cv::Point3d(-10000., -10000., 0.);
     }
 
-    render->CameraMode(0);
+    // render->CameraMode(0);
     double calibK[9];
     std::copy(K, K + 9, calibK);
-    render->options.K = calibK;
-    render->RenderProjection(vis_data);
-    render->RenderAndReadProjection();
+    // render->options.K = calibK;
+    // render->RenderProjection(vis_data);
+    // render->RenderAndReadProjection();
     cv::Mat XY = cv::Mat(sourceImg.rows, sourceImg.cols, CV_32FC3, RGBFLOAT_BUFFER);   // wrapper around buffer
     cv::flip(XY, XY, 0);
 

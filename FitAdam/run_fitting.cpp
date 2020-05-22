@@ -447,7 +447,6 @@ int main(int argc, char* argv[])
 
                 // run optical flow (forward)
                 cv::Mat virtualImage;
-                // getVirtualImageConstraint(render, calibK, mesh0, mesh2, depthframe0, depthframe2, img0, img2, virtualImage, surface_constraint, 0);
                 getVirtualImageConstraint(render, calibK, mesh1, mesh2, depthframe1, depthframe2, img1, img2, virtualImage, surface_constraint, 0);
                 std::cout << "Constraints from texture Optical flow: " << surface_constraint.size() << std::endl;
 
