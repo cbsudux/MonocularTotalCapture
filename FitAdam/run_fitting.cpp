@@ -168,8 +168,8 @@ int main(int argc, char* argv[])
 
     // render->CameraMode(0);
     // render->options.K = calibK;
-    glutDisplayFunc(emptyfunc);
-    glutMainLoopEvent();
+    // glutDisplayFunc(emptyfunc);
+    // glutMainLoopEvent();
 
     /*
     Stage 1: run single frame fitting & refitting
