@@ -595,10 +595,11 @@ int main(int argc, char* argv[])
             mesh2.clearMesh();  // clear out the mesh before re-generating
             GenerateMesh(mesh2, gResultJoint, batch_refit_params[i + 1], g_total_model, 2, FLAGS_euler);
 
-            output_file << '###############################' << i << '###############################';
-            output_file << gResultJoint;
-            std::cout << '###############################' << i << '###############################'<< std::endl;
-            std::cout << gResultJoint << std::endl;
+        	size_t n_tmp = sizeof(gResultJoint)/sizeof(gResultJoint[0]);
+
+            for (int i_tmp = 0; i_tmp < n_tmp ; i_tmp++ ){
+                output_file << gResultJoint[i_tmp] << ' ';
+            }
 
             VisualizedData vis_data2_;
             vis_data2_.resultJoint = gResultJoint;
