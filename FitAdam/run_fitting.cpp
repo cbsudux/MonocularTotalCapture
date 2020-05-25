@@ -600,6 +600,7 @@ int main(int argc, char* argv[])
             for (int i_tmp = 0; i_tmp < n_tmp ; i_tmp++ ){
                 output_file << gResultJoint[i_tmp] << ' ';
             }
+            output_file << std::endl;
 
             VisualizedData vis_data2_;
             vis_data2_.resultJoint = gResultJoint;
