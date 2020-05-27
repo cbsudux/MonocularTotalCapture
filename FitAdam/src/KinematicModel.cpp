@@ -12,7 +12,8 @@ std::array<int, 21> map_cocoreg_to_measure = {12, 14, 12, 9, 10, 11, 3, 4, 5, 8,
 std::array<int, 21> map_h36m_to_measure = {12, 14, 12, 9, 10, 11, 3, 4, 5, 8, 7, 6, 2, 1, 0, 15, 17, 16, 18, 13, 12};
 
 							 
-void GenerateMesh(CMeshModelInstance& returnMesh, double* resultJoint, smpl::SMPLParams& targetParam, smpl::HandModel& g_handl_model, const int regressor_type, const bool euler)
+void GenerateMesh(CMeshModelInstance& returnMesh, double* resultJoint, smpl::SMPLParams& targetParam, smpl::HandModel& g_handl_model, 
+				const int regressor_type, const bool euler)
 {
 	Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> out_v(smpl::HandModel::NUM_VERTICES, 3);
 	Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> outJ(smpl::HandModel::NUM_JOINTS, 3);
@@ -68,7 +69,8 @@ void GenerateMesh(CMeshModelInstance& returnMesh, double* resultJoint, smpl::SMP
 }
 
 
-void GenerateMesh(CMeshModelInstance& returnMesh, double* resultJoint, smpl::SMPLParams& targetParam, TotalModel& g_total_model, const int regressor_type, const bool euler)
+void GenerateMesh(CMeshModelInstance& returnMesh, double* resultJoint, smpl::SMPLParams& targetParam, TotalModel& g_total_model, 
+				const int regressor_type, const bool euler)
 {
 	Eigen::Matrix<double, Eigen::Dynamic, 1> outV(TotalModel::NUM_VERTICES * 3);
 	Eigen::VectorXd transforms;
@@ -125,6 +127,8 @@ void GenerateMesh(CMeshModelInstance& returnMesh, double* resultJoint, smpl::SMP
 			resultJoint[3 * i + 1] = joints(3 * map_adam_to_measure[i] + 1);
 			resultJoint[3 * i + 2] = joints(3 * map_adam_to_measure[i] + 2);
 		}
+
+		// what's this?
 		std::copy(outV.data() + 3 * 8130, outV.data() + 3 * 8131, resultJoint + 3 * 1); // nose
 		std::copy(outV.data() + 3 * 6731, outV.data() + 3 * 6732, resultJoint + 3 * 15); // leye
 		std::copy(outV.data() + 3 * 6970, outV.data() + 3 * 6971, resultJoint + 3 * 16); // lear
@@ -151,6 +155,7 @@ void GenerateMesh(CMeshModelInstance& returnMesh, double* resultJoint, smpl::SMP
 			resultJoint[3 * i + 2] = joints(3 * map_adam_to_measure[i] + 2);
 		}
 	}
+	// This is what's printed...so it should be called
 	else
 	{
 		assert(regressor_type == 2);
@@ -163,9 +168,12 @@ void GenerateMesh(CMeshModelInstance& returnMesh, double* resultJoint, smpl::SMP
 			resultJoint[3 * i + 1] = J_coco(map_cocoreg_to_measure[i], 1);
 			resultJoint[3 * i + 2] = J_coco(map_cocoreg_to_measure[i], 2);
 		}
+		// finding mid hip joint right
 		resultJoint[3 * 2 + 0] = 0.5 * (resultJoint[3 * 6 + 0] + resultJoint[3 * 12 + 0]);
 		resultJoint[3 * 2 + 1] = 0.5 * (resultJoint[3 * 6 + 1] + resultJoint[3 * 12 + 1]);
 		resultJoint[3 * 2 + 2] = 0.5 * (resultJoint[3 * 6 + 2] + resultJoint[3 * 12 + 2]);
+
+		// For hands
 		for (int i = 21; i < 63; i++)
 		{
 			resultJoint[3 * i] = joints(3 * map_adam_to_measure[i]);

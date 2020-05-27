@@ -912,7 +912,8 @@ void Renderer::DrawSkeleton(double* joint, uint vis_type, std::vector<int> connM
     }
 
     if (vis_type == 2)
-    {
+    {   
+        //  Scatter matrix
         for (int i = start_idx; i < end_idx; i++)
         {
             if (i < 21) rad = 2.0f;
@@ -923,17 +924,19 @@ void Renderer::DrawSkeleton(double* joint, uint vis_type, std::vector<int> connM
             glPopMatrix();
         }
 
+        // connMat == connection matrix...?. Yeah makes sense since you divide by 2 for looping length
+        //  hmm seems to have no normalization
         for (uint i = 0; i < connMat.size() / 2; i++)
         {
-            int j = connMat[2 * i];
-            int k = connMat[2 * i + 1];
-            if (j < 21)  cone_rad = 2.0f;
-            else cone_rad = 1.0f;
+            int j = connMat[2 * i];  //makes sense
+            int k = connMat[2 * i + 1];  //makes sense
+            if (j < 21)  cone_rad = 2.0f;  //what?
+            else cone_rad = 1.0f;  
             GLfloat x0 = joint[3 * j], y0 = joint[3 * j + 1], z0 = joint[3 * j + 2];
-            GLfloat x1 = joint[3 * k] - x0, y1 = joint[3 * k + 1] - y0, z1 = joint[3 * k + 2] - z0;
-            GLfloat length = sqrt(x1*x1 + y1*y1 + z1*z1);
+            GLfloat x1 = joint[3 * k] - x0, y1 = joint[3 * k + 1] - y0, z1 = joint[3 * k + 2] - z0;   // Why is x0 being subtracted from x1?
+            GLfloat length = sqrt(x1*x1 + y1*y1 + z1*z1);   
             GLfloat theta = acos(z1/length) * 180 / PI;
-            GLfloat phi = atan2(y1, x1) * 180 / PI;
+            GLfloat phi = atan2(y1, x1) * 180 / PI;  //this is bullshit lol. They take x0 as the base and plot a 3D vector to x1
             glPushMatrix();
             glTranslatef(x0, y0, z0);
             glRotatef(phi, 0, 0, 1);
